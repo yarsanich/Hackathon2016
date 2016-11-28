@@ -1,0 +1,175 @@
+{% extends "layout.html" %}
+{% block title %}Адміністративна панель{% endblock %}
+{% block body %}
+
+<div class="container">
+  <nav id="admin-menu">
+    <ul>
+      <li class="col-md-6 col-sm-2"><a href="#info_blocks">Додати користувача</a></li>
+      <li class="col-md-6 col-sm-2"><a href="#info_blocks">Додати блок інформації</a></li>
+    </ul>
+  </nav>
+<div style="clear:both;"></div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Користувачі</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            {% for user in users %}
+            <tr>
+              <td>{{ user.login }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.name }}</td>
+              <td><a href="">remove</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Список учасників</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          {% for register in registered %}
+          <tr>
+            <td>{{ register.name }}</td>
+            <td>{{ register.email }}</td>
+            <td>{{ register.message }}</td>
+            <td><a href="">remove</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Інформаційні блоки</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            {% for block in blocks %}
+            <tr>
+              <td>{{ block.title }}</td>
+              <td><img style="max-width: 200px; max-hight: 200px;" src="{{ block.image }}"></td>
+              <td>{{ block.alt_image }}</td>
+              <td>{{ block.description }}</td>
+              <td><a href="">remove</a></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+
+
+<section class="content">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+      <!-- general form elements -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Додати користувача</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="/admin/update_users" method="POST">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Логін</label>
+              <input type="text" name="login" class="form-control" id="exampleInputEmail1" placeholder="Логін">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Еmail">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Пароль</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Ім'я'</label>
+              <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Ім'я">
+            </div>
+          </div>
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Додати</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.box -->
+        <!-- /.box-body -->
+      <!-- /.box -->
+    </div>
+    <!--/.col (right) -->
+    <div class="col-md-6">
+      <!-- general form elements -->
+      <div class="box box-primary" id="info_blocks">
+        <div class="box-header with-border">
+          <h3 class="box-title">Додати інформаційний блок</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="/admin/update_blocks" method="POST">
+          <div class="box-body">
+            <div class="form-group">
+              <label>Заголовок</label>
+              <input type="text" name="block_title" class="form-control" id="exampleInputEmail1" placeholder="Заголовок">
+            </div>
+            <div class="form-group">
+              <label>Посилання на зображення</label>
+              <input type="text" name="image_path" class="form-control" id="exampleInputEmail1" placeholder="Посилання">
+            </div>
+            <div class="form-group">
+              <label>Опис блоку</label>
+              <textarea class="form-control" rows="3" name="block_descr"></textarea>
+            </div>
+          </div>
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Додати</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.box -->
+        <!-- /.box-body -->
+      <!-- /.box -->
+    </div>
+    <!--/.col (right) -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock %}
